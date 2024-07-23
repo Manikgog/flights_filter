@@ -1,4 +1,4 @@
-import com.gridnine.testing.Flight;
+import com.gridnine.testing.models.Flight;
 import com.gridnine.testing.FlightBuilder;
 import com.gridnine.testing.filters.FlightFilter;
 import com.gridnine.testing.filters.GroundTimeFlightFilter;

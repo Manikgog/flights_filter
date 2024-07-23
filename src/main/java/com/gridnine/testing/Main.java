@@ -2,6 +2,7 @@ package com.gridnine.testing;
 
 import com.gridnine.testing.filters.ArrivalBeforeDepartureFlightFilter;
 import com.gridnine.testing.filters.FlightFilter;
+import com.gridnine.testing.models.Flight;
 
 import java.util.ArrayList;
 import java.util.List;
