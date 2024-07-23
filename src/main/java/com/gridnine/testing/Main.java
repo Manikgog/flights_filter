@@ -2,6 +2,8 @@ package com.gridnine.testing;
 
 import com.gridnine.testing.filters.ArrivalBeforeDepartureFlightFilter;
 import com.gridnine.testing.filters.FlightFilter;
+import com.gridnine.testing.filters.GroundTimeFlightFilter;
+import com.gridnine.testing.filters.TimeDepartureFlightFilter;
 import com.gridnine.testing.models.Flight;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class Main {
 
         filteredFlights.forEach(System.out::println);
 
-        /*System.out.println("\nПолеты отфильтрованные от полетов, где дата и время раньше текущих даты и времени:");
+        System.out.println("\nПолеты отфильтрованные от полетов, где дата и время раньше текущих даты и времени:");
 
         List<Flight> currentDateAndTimeFlights = filterFlights(flights, new TimeDepartureFlightFilter());
 
@@ -35,11 +37,11 @@ public class Main {
                 new TimeDepartureFlightFilter(),
                 new GroundTimeFlightFilter());
 
-        System.out.println("Применение всех фильтров сразу.");
+        System.out.println("\nПрименение всех фильтров сразу.");
 
         List<Flight> allFiltersFlights = filterFlights(flights, filters);
 
-        System.out.println(allFiltersFlights);*/
+        allFiltersFlights.forEach(System.out::println);
 
     }
 
