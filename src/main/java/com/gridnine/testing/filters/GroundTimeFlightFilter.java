@@ -8,7 +8,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for filtering out flights that have a total time on the ground of more than groundTimeLimit.
+ */
 public class GroundTimeFlightFilter implements FlightFilter{
+    // The limit of the total time spent on earth
+    private final int groundTimeLimit;
+
+    public GroundTimeFlightFilter() {
+        this.groundTimeLimit = 2;
+    }  // default limit is 2 hours for ground time (in hours)  // constructor for customizable limit  // constructor for default limit 2 hours for ground time (in hours)  // constructor for customizable limit 2 hours for ground time (in hours)  // constructor for default limit 2 hours for ground time (in hours)  // constructor for customizable limit 2 hours for ground time (in
+
+    public GroundTimeFlightFilter(int groundTimeLimit) {
+        this.groundTimeLimit = groundTimeLimit;
+    }
 
     /**
      * A method for filtering out flights that have a total time on the ground of more than 2 hours.

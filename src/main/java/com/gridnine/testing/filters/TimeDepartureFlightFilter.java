@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * A class for filtering out flights whose departure time is earlier than the current time.
+ */
 public class TimeDepartureFlightFilter implements FlightFilter {
     /**
      * A method for filtering out flights whose departure time is earlier than the current time.
