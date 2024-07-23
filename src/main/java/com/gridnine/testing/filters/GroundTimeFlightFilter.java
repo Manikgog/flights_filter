@@ -14,10 +14,17 @@ public class GroundTimeFlightFilter implements FlightFilter{
     // The limit of the total time spent on earth
     private final int groundTimeLimit;
 
+    /**
+     * Default constructor with a ground time limit of 2 hours.
+     */  // default constructor with a ground time limit of 2 hours  // default constructor with a ground time limit of 2 hours  // default constructor with a ground time limit of 2 hours  // default constructor with a ground time limit of 2 hours  // default constructor with a ground time limit of 2 hours  // default constructor with a ground time limit of 2 hours  // default constructor with
     public GroundTimeFlightFilter() {
         this.groundTimeLimit = 2;
-    }  // default limit is 2 hours for ground time (in hours)  // constructor for customizable limit  // constructor for default limit 2 hours for ground time (in hours)  // constructor for customizable limit 2 hours for ground time (in hours)  // constructor for default limit 2 hours for ground time (in hours)  // constructor for customizable limit 2 hours for ground time (in
+    }
 
+    /**
+     * Constructor with a custom ground time limit.
+     * @param groundTimeLimit - the limit of the total time spent on earth.
+     */
     public GroundTimeFlightFilter(int groundTimeLimit) {
         this.groundTimeLimit = groundTimeLimit;
     }
