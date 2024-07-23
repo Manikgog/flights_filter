@@ -1,9 +1,9 @@
-import com.gridnine.testing.models.Flight;
 import com.gridnine.testing.FlightBuilder;
 import com.gridnine.testing.filters.ArrivalBeforeDepartureFlightFilter;
 import com.gridnine.testing.filters.FlightFilter;
-import org.junit.Test;
+import com.gridnine.testing.models.Flight;
 import org.assertj.core.api.Assertions;
+import org.junit.Test;
 import java.util.List;
 
 public class ArrivalBeforeDepartureFlightFilterTest {
@@ -17,7 +17,11 @@ public class ArrivalBeforeDepartureFlightFilterTest {
 
         List<Flight> filteredFlights = filter.filter(flightList);
 
-        Assertions.assertThat(filteredFlights).hasSize(5);
-        Assertions.assertThat(flightList.get(3)).isNotIn(filteredFlights);
+        List<Flight> expectedFlights = flightList.stream().filter(flight -> flight.getSegments().stream()
+                        .anyMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
+                .toList();
+
+        Assertions.assertThat(filteredFlights).hasSize(expectedFlights.size());
+        Assertions.assertThat(filteredFlights).isEqualTo(expectedFlights);
     }
 }

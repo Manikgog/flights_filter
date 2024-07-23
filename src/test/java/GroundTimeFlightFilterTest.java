@@ -2,9 +2,13 @@ import com.gridnine.testing.models.Flight;
 import com.gridnine.testing.FlightBuilder;
 import com.gridnine.testing.filters.FlightFilter;
 import com.gridnine.testing.filters.GroundTimeFlightFilter;
+import com.gridnine.testing.models.Segment;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GroundTimeFlightFilterTest {
@@ -17,7 +21,28 @@ public class GroundTimeFlightFilterTest {
 
         List<Flight> filteredFlights = filter.filter(flightList);
 
-        Assertions.assertThat(filteredFlights).hasSize(4);
-        Assertions.assertThat(List.of(flightList.get(4), flightList.get(5))).isNotIn(filteredFlights);
+        List<Flight> expectedFlights = new ArrayList<>();
+        List<Flight> excludedFlights = new ArrayList<>();
+        long groundTimeLimit = 2;
+        for (Flight flight : flightList) {
+            List<Segment> segments = flight.getSegments();
+            long duration = 0;
+            for (int i = 0; i < segments.size() - 1; i++) {
+                LocalDateTime depTime = segments.get(i + 1).getDepartureDate();
+                LocalDateTime arrTime = segments.get(i).getArrivalDate();
+                duration += Duration.between(arrTime, depTime).toHours();
+                if(duration > groundTimeLimit) {
+                    break;  // if duration is more than groundTimeLimit hours, break the loop
+                }
+            }
+            if (duration <= groundTimeLimit) {
+                expectedFlights.add(flight);
+            }else{
+                excludedFlights.add(flight);
+            }
+        }
+
+        Assertions.assertThat(filteredFlights).isEqualTo(expectedFlights);
+        Assertions.assertThat(excludedFlights).isNotIn(filteredFlights);
     }
 }

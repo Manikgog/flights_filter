@@ -1,11 +1,9 @@
 package com.gridnine.testing.filters;
 
 import com.gridnine.testing.models.Flight;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * A class for filtering out flights whose departure time is earlier than the current time.
@@ -22,6 +20,6 @@ public class TimeDepartureFlightFilter implements FlightFilter {
                 .filter(flight -> flight.getSegments().stream()
                         .anyMatch(segment -> segment.getDepartureDate()
                                 .isAfter(LocalDateTime.now().truncatedTo(TimeUnit.MINUTES.toChronoUnit()))))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
