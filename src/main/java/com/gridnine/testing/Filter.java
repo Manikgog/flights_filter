@@ -3,6 +3,7 @@ package com.gridnine.testing;
 import com.gridnine.testing.filters.FlightFilter;
 import com.gridnine.testing.models.Flight;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,11 @@ public class Filter {
      * @param filter - filter to add to the list of filters
      */
     public void addFilter(FlightFilter filter) {
+        for (FlightFilter item : filters) {
+            if (filter.getClass().equals(item.getClass())) {
+                throw new IllegalArgumentException(filter.getClass() + " already added");
+            }
+        }
         filters.add(filter);
     }
 
@@ -36,7 +42,18 @@ public class Filter {
      * @param filtersFlights - list of filters to add
      */
     public void addFilters(List<FlightFilter> filtersFlights) {
+        for (FlightFilter filter : filtersFlights) {
+            for (FlightFilter item : filters) {
+                if (filter.getClass().equals(item.getClass())) {
+                    throw new IllegalArgumentException(filter.getClass() + " already added");
+                }
+            }
+        }
         filters.addAll(filtersFlights);
+    }
+
+    public List<FlightFilter> getFilters() {
+        return Collections.unmodifiableList(filters);
     }
 
     /**

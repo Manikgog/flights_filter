@@ -17,6 +17,7 @@ public class Main {
 
         filter.addFilter(new ArrivalBeforeDepartureFlightFilter());
 
+
         List<Flight> filteredFlights = filter.filterFlights(flights);
 
         System.out.println("\nПолеты отфильтрованные от полетов, где дата и время прибытия раньше чем дата и время вылета:");

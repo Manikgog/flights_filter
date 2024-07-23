@@ -4,7 +4,6 @@ import com.gridnine.testing.filters.FlightFilter;
 import com.gridnine.testing.filters.TimeDepartureFlightFilter;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
