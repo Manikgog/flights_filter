@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A class for filtering out flights whose arrival time is earlier than the departure.
  */
-public class ArrivalBeforeDepartureFlightFilter implements FlightFilter  {
+public class ArrivalBeforeDepartureFlightFilter implements FlightFilter {
     /**
      * A method for filtering out flights whose arrival time is earlier than the departure time.
      * @param flights - a list of flights to be filtered.

@@ -5,8 +5,6 @@ import com.gridnine.testing.filters.FlightFilter;
 import com.gridnine.testing.filters.GroundTimeFlightFilter;
 import com.gridnine.testing.filters.TimeDepartureFlightFilter;
 import com.gridnine.testing.models.Flight;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -15,21 +13,31 @@ public class Main {
         List<Flight> flights = FlightBuilder.createFlights();
         flights.forEach(System.out::println);
 
-        List<Flight> filteredFlights = filterFlights(flights, new ArrivalBeforeDepartureFlightFilter());
+        Filter filter = new Filter();
+
+        filter.addFilter(new ArrivalBeforeDepartureFlightFilter());
+
+        List<Flight> filteredFlights = filter.filterFlights(flights);
 
         System.out.println("\nПолеты отфильтрованные от полетов, где дата и время прибытия раньше чем дата и время вылета:");
 
         filteredFlights.forEach(System.out::println);
 
+        filter.clear();
+        filter.addFilter(new TimeDepartureFlightFilter());
+
         System.out.println("\nПолеты отфильтрованные от полетов, где дата и время раньше текущих даты и времени:");
 
-        List<Flight> currentDateAndTimeFlights = filterFlights(flights, new TimeDepartureFlightFilter());
+        List<Flight> currentDateAndTimeFlights = filter.filterFlights(flights);
 
         currentDateAndTimeFlights.forEach(System.out::println);
 
         System.out.println("\nПолеты отфильтрованные от полетов, где общее время нахождения на земле больше 2 часов:");
 
-        List<Flight> groundTimeFlightsMoreTwoHours = filterFlights(flights, new GroundTimeFlightFilter());
+        filter.clear();
+        filter.addFilter(new GroundTimeFlightFilter()); // 2 hours in minutes
+
+        List<Flight> groundTimeFlightsMoreTwoHours = filter.filterFlights(flights);
 
         groundTimeFlightsMoreTwoHours.forEach(System.out::println);
 
@@ -39,21 +47,14 @@ public class Main {
 
         System.out.println("\nПрименение всех фильтров сразу.");
 
-        List<Flight> allFiltersFlights = filterFlights(flights, filters);
+        filter.clear();
+        filter.addFilters(filters);
+
+        List<Flight> allFiltersFlights = filter.filterFlights(flights);
 
         allFiltersFlights.forEach(System.out::println);
 
     }
 
-    public static List<Flight> filterFlights(List<Flight> flights, FlightFilter filter) {
-        return filter.filter(flights);
-    }
 
-    public static List<Flight> filterFlights(List<Flight> flights, List<FlightFilter> filters) {
-        List<Flight> filtered = new ArrayList<>();
-        for (FlightFilter filter : filters) {
-            filtered = filter.filter(flights);
-        }
-        return filtered;
-    }
 }

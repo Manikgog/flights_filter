@@ -2,6 +2,7 @@ package com.gridnine.testing.filters;
 
 import com.gridnine.testing.models.Flight;
 import com.gridnine.testing.models.Segment;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
