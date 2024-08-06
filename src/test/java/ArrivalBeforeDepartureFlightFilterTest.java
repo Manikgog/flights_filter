@@ -18,7 +18,7 @@ public class ArrivalBeforeDepartureFlightFilterTest {
         List<Flight> filteredFlights = filter.filter(flightList);
 
         List<Flight> expectedFlights = flightList.stream().filter(flight -> flight.getSegments().stream()
-                        .anyMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
+                        .allMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
                 .toList();
 
         Assertions.assertThat(filteredFlights).hasSize(expectedFlights.size());

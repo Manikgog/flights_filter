@@ -15,7 +15,7 @@ public class ArrivalBeforeDepartureFlightFilter implements FlightFilter {
     @Override
     public List<Flight> filter(List<Flight> flights) {
         return flights.stream().filter(flight -> flight.getSegments().stream()
-                        .anyMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
+                        .allMatch(segment -> segment.getDepartureDate().isBefore(segment.getArrivalDate())))
                 .toList();
     }
 }

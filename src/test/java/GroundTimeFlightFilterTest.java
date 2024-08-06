@@ -19,9 +19,9 @@ public class GroundTimeFlightFilterTest {
     public void filterTest() {
         List<Flight> flightList = FlightBuilder.createFlights();
 
-        List<Flight> filteredFlights = filter.filter(flightList);
+        List<Flight> expectedFlights = filter.filter(flightList);
 
-        List<Flight> expectedFlights = new ArrayList<>();
+        List<Flight> actualFlights = new ArrayList<>();
         List<Flight> excludedFlights = new ArrayList<>();
         long groundTimeLimit = 2;
         for (Flight flight : flightList) {
@@ -30,19 +30,19 @@ public class GroundTimeFlightFilterTest {
             for (int i = 0; i < segments.size() - 1; i++) {
                 LocalDateTime depTime = segments.get(i + 1).getDepartureDate();
                 LocalDateTime arrTime = segments.get(i).getArrivalDate();
-                duration += Duration.between(arrTime, depTime).toHours();
-                if(duration > groundTimeLimit) {
+                duration += Duration.between(arrTime, depTime).toMinutes();
+                if(duration > (groundTimeLimit * 60L)) {
                     break;  // if duration is more than groundTimeLimit hours, break the loop
                 }
             }
-            if (duration <= groundTimeLimit) {
-                expectedFlights.add(flight);
+            if (duration <= (groundTimeLimit * 60L)) {
+                actualFlights.add(flight);
             }else{
                 excludedFlights.add(flight);
             }
         }
 
-        Assertions.assertThat(filteredFlights).isEqualTo(expectedFlights);
-        Assertions.assertThat(excludedFlights).isNotIn(filteredFlights);
+        Assertions.assertThat(actualFlights).isEqualTo(expectedFlights);
+        Assertions.assertThat(excludedFlights).isNotIn(actualFlights);
     }
 }

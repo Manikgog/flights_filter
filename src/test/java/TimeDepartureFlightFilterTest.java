@@ -16,11 +16,11 @@ public class TimeDepartureFlightFilterTest {
     public void filterTest() {
         List<Flight> flightList = FlightBuilder.createFlights();
 
-        List<Flight> filteredFlights = filter.filter(flightList);
+        List<Flight> actualFlights = filter.filter(flightList);
 
         List<Flight> expectedFlights = flightList.stream()
                 .filter(flight -> flight.getSegments().stream()
-                        .anyMatch(segment -> segment.getDepartureDate()
+                        .allMatch(segment -> segment.getDepartureDate()
                                 .isAfter(LocalDateTime.now().truncatedTo(TimeUnit.MINUTES.toChronoUnit()))))
                 .toList();
 
@@ -29,7 +29,7 @@ public class TimeDepartureFlightFilterTest {
                                 .isBefore(LocalDateTime.now().truncatedTo(TimeUnit.MINUTES.toChronoUnit()))))
                 .toList();
 
-        Assertions.assertThat(filteredFlights).isEqualTo(expectedFlights);
-        Assertions.assertThat(excludedFlights).isNotIn(filteredFlights);
+        Assertions.assertThat(actualFlights).isEqualTo(expectedFlights);
+        Assertions.assertThat(excludedFlights).isNotIn(actualFlights);
     }
 }

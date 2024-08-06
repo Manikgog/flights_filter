@@ -18,7 +18,7 @@ public class TimeDepartureFlightFilter implements FlightFilter {
     public List<Flight> filter(List<Flight> flights) {
         return flights.stream()
                 .filter(flight -> flight.getSegments().stream()
-                        .anyMatch(segment -> segment.getDepartureDate()
+                        .allMatch(segment -> segment.getDepartureDate()
                                 .isAfter(LocalDateTime.now().truncatedTo(TimeUnit.MINUTES.toChronoUnit()))))
                 .toList();
     }

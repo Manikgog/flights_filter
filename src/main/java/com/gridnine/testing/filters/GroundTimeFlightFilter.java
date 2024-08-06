@@ -44,12 +44,12 @@ public class GroundTimeFlightFilter implements FlightFilter{
             for (int i = 0; i < segments.size() - 1; i++) {
                 LocalDateTime depTime = segments.get(i + 1).getDepartureDate();
                 LocalDateTime arrTime = segments.get(i).getArrivalDate();
-                duration += Duration.between(arrTime, depTime).toHours();
-                if(duration > groundTimeLimit) {
+                duration += Duration.between(arrTime, depTime).toMinutes();
+                if(duration > (groundTimeLimit * 60L)) {
                     break;  // if duration is more than groundTimeLimit hours, break the loop
                 }
             }
-            if (duration <= groundTimeLimit) {
+            if (duration <= (groundTimeLimit * 60L)) {
                 listLessTwoHours.add(flight);
             }
         }
