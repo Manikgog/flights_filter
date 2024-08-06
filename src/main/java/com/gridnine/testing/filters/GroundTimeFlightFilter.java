@@ -31,7 +31,7 @@ public class GroundTimeFlightFilter implements FlightFilter{
     }
 
     /**
-     * A method for filtering out flights that have a total time on the ground of more than 2 hours.
+     * A method for filtering flights with a total ground time of more than 2 hours or negative ground time.
      * @param flights - a list of flights to be filtered.
      * @return List<Flight> - a filtered list of Flight
      */
@@ -45,11 +45,11 @@ public class GroundTimeFlightFilter implements FlightFilter{
                 LocalDateTime depTime = segments.get(i + 1).getDepartureDate();
                 LocalDateTime arrTime = segments.get(i).getArrivalDate();
                 duration += Duration.between(arrTime, depTime).toMinutes();
-                if(duration > (groundTimeLimit * 60L)) {
+                if(duration > (groundTimeLimit * 60L) || duration < 0L) {
                     break;  // if duration is more than groundTimeLimit hours, break the loop
                 }
             }
-            if (duration <= (groundTimeLimit * 60L)) {
+            if (duration <= (groundTimeLimit * 60L) && duration >= 0L) {
                 listLessTwoHours.add(flight);
             }
         }

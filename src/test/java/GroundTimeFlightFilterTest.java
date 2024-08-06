@@ -31,11 +31,11 @@ public class GroundTimeFlightFilterTest {
                 LocalDateTime depTime = segments.get(i + 1).getDepartureDate();
                 LocalDateTime arrTime = segments.get(i).getArrivalDate();
                 duration += Duration.between(arrTime, depTime).toMinutes();
-                if(duration > (groundTimeLimit * 60L)) {
+                if(duration > (groundTimeLimit * 60L) || duration < 0L) {
                     break;  // if duration is more than groundTimeLimit hours, break the loop
                 }
             }
-            if (duration <= (groundTimeLimit * 60L)) {
+            if (duration <= (groundTimeLimit * 60L) && duration >= 0L) {
                 actualFlights.add(flight);
             }else{
                 excludedFlights.add(flight);

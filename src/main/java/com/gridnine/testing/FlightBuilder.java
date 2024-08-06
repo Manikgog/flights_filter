@@ -24,7 +24,7 @@ public class FlightBuilder {
                 //A flight that departs before it arrives
                 createFlight(threeDaysFromNow, threeDaysFromNow.minusHours(6)),
                 //A flight with more than two hours ground time
-                createFlight(threeDaysFromNow, threeDaysFromNow.plusHours(2), threeDaysFromNow.plusHours(3).plusMinutes(59), threeDaysFromNow.plusHours(6)),
+                createFlight(threeDaysFromNow, threeDaysFromNow.plusHours(2), threeDaysFromNow.plusHours(3).plusMinutes(60), threeDaysFromNow.plusHours(6)),
                 //Another flight with more than two hours ground time
                 createFlight(threeDaysFromNow, threeDaysFromNow.plusHours(2), threeDaysFromNow.plusHours(3), threeDaysFromNow.plusHours(4), threeDaysFromNow.plusHours(6), threeDaysFromNow.plusHours(7)),
                 // Flight where one segment fails inspection (arrival time before departure time)
